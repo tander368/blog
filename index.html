@@ -13,22 +13,43 @@
         }
 
         :root {
-            --primary: #00d4ff;
+            --primary: #0099cc;
             --secondary: #ff6b35;
-            --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
-            --text: #e0e0e0;
-            --text-dim: #888;
+            --bg-dark: #1a2332;
+            --bg-card: #243447;
+            --text: #e8eef5;
+            --text-dim: #8a9bb0;
         }
 
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background-color: var(--bg-dark);
+            background:
+                radial-gradient(circle at 10% 0%, rgba(0, 153, 204, 0.15), transparent 50%),
+                radial-gradient(circle at 90% 100%, rgba(255, 107, 53, 0.12), transparent 50%),
+                linear-gradient(135deg, #1a2332 0%, #243447 50%, #1a2332 100%);
+            background-attachment: fixed;
             color: var(--text);
             font-size: 17px;
             line-height: 1.8;
             overflow-x: hidden;
             cursor: default;
+            position: relative;
+        }
+
+        body::before {
+            content: '⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡ ⚙ ⚡';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 24px;
+            color: rgba(0, 153, 204, 0.08);
+            line-height: 80px;
+            word-spacing: 60px;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
         }
 
         /* 点击特效容器 */
@@ -55,11 +76,13 @@
         /* 齿轮装饰 */
         .gear {
             position: fixed;
-            opacity: 0.08;
+            opacity: 0.12;
             z-index: -1;
             animation: rotate 20s linear infinite;
+            color: rgba(0, 153, 204, 0.5);
+            filter: drop-shadow(0 0 15px rgba(0, 153, 204, 0.3));
         }
-
+ 
         .gear-1 { top: 10%; left: -5%; width: 300px; }
         .gear-2 { top: 60%; right: -8%; width: 400px; animation-direction: reverse; }
         .gear-3 { bottom: -10%; left: 30%; width: 250px; }
@@ -123,12 +146,13 @@
             padding: 8px 14px;
             font-size: 13px;
             border: 2px solid var(--primary);
-            background: transparent;
+            background: var(--bg-dark);
             color: var(--primary);
             cursor: pointer;
             transition: all 0.3s;
             font-family: 'Press Start 2P', cursive;
             letter-spacing: 1px;
+            appearance: none;
         }
 
         .lang-toggle:hover {
@@ -138,6 +162,12 @@
             transform: translateY(-2px);
         }
 
+        .lang-toggle option {
+            background: var(--bg-dark);
+            color: var(--text);
+            font-family: 'Press Start 2P', cursive;
+        }
+
         /* 主区域 */
         .hero {
             min-height: 100vh;
@@ -145,6 +175,31 @@
             align-items: center;
             justify-content: center;
             padding: 120px 50px 80px;
+            position: relative;
+        }
+
+        /* 科技感网格背景（细线，不抢眼） */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.18), transparent 60%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .hero-content {
@@ -236,6 +291,20 @@
             padding: 80px 50px;
             max-width: 1000px;
             margin: 0 auto;
+            border-top: 1px solid rgba(0, 153, 204, 0.2);
+            position: relative;
+        }
+
+        .section::before {
+            content: '⚙';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            padding: 0 15px;
+            color: var(--primary);
+            font-size: 20px;
         }
 
         .section-title {
@@ -434,8 +503,10 @@
             border-top: 2px solid #222;
             color: var(--text-dim);
             font-size: 14px;
+            position: relative;
+            overflow: hidden;
         }
-
+ 
         .footer-quote {
             font-style: italic;
             color: var(--text-dim);
@@ -443,6 +514,104 @@
             padding: 20px;
             border: 1px solid #333;
             display: inline-block;
+        }
+
+        /* 角落科技符号装饰 */
+        .corner-decor {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            border-radius: 18px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .corner-decor.top-left {
+            top: -40px;
+            left: -20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decor.bottom-right {
+            bottom: -40px;
+            right: -20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .corner-decor::before,
+        .corner-decor::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.6), transparent);
+            height: 1px;
+            width: 80px;
+        }
+
+        .corner-decor::before {
+            top: 18px;
+            left: 18px;
+        }
+
+        .corner-decor::after {
+            bottom: 18px;
+            right: 18px;
+            transform: rotate(90deg);
+            transform-origin: right center;
+        }
+
+        /* 浮动小部件：数据点/节点 */
+        .floating-widget {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(0, 212, 255, 0.7);
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+            opacity: 0.7;
+            z-index: -1;
+            animation: floatNode 18s linear infinite;
+        }
+
+        .floating-widget::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.7), transparent);
+            transform-origin: left center;
+            opacity: 0.7;
+        }
+
+        .floating-widget.small {
+            width: 5px;
+            height: 5px;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
+            animation-duration: 22s;
+        }
+
+        .floating-widget.orange {
+            background: rgba(255, 107, 53, 0.8);
+            box-shadow: 0 0 12px rgba(255, 107, 53, 0.8);
+        }
+
+        @keyframes floatNode {
+            0% {
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate3d(40px, -60px, 0);
+            }
+            100% {
+                transform: translate3d(80px, -120px, 0);
+                opacity: 0;
+            }
         }
 
         /* 滚动条 */
@@ -496,6 +665,13 @@
     </style>
 </head>
 <body>
+    <!-- 浮动科技小部件 -->
+    <div class="floating-widget" style="top: 30%; left: 8%;"></div>
+    <div class="floating-widget small" style="top: 72%; left: 18%; animation-delay: -6s;"></div>
+    <div class="floating-widget orange" style="top: 20%; right: 12%; animation-delay: -3s;"></div>
+    <div class="floating-widget small" style="top: 55%; right: 5%; animation-delay: -10s;"></div>
+    <div class="floating-widget" style="bottom: 12%; left: 35%; animation-delay: -14s;"></div>
+
     <!-- 装饰齿轮 -->
     <svg class="gear gear-1" viewBox="0 0 100 100">
         <path fill="currentColor" d="M50 10 L53 10 L55 20 L60 18 L65 8 L70 12 L68 22 L75 25 L82 18 L85 23 L78 32 L83 38 L93 35 L95 42 L85 47 L85 53 L95 58 L93 65 L83 62 L78 68 L85 77 L82 82 L75 75 L68 78 L70 88 L65 92 L60 82 L55 80 L53 90 L47 90 L45 80 L40 82 L35 92 L30 88 L32 78 L25 75 L18 82 L15 77 L22 68 L17 62 L7 65 L5 58 L15 53 L15 47 L5 42 L7 35 L17 38 L22 32 L15 23 L18 18 L25 25 L32 22 L30 12 L35 8 L40 18 L45 20 L47 10 Z M50 35 A15 15 0 1 0 50 65 A15 15 0 1 0 50 35"/>
@@ -518,7 +694,12 @@
                 <a href="#thoughts" data-i18n-key="navThoughts">碎碎念</a>
                 <a href="#contact" data-i18n-key="navContact">联系我</a>
             </div>
-            <button class="lang-toggle" type="button" aria-label="切换语言">EN</button>
+            <select class="lang-toggle" aria-label="选择语言">
+                <option value="zh">中文</option>
+                <option value="en">English</option>
+                <option value="fr">Français</option>
+                <option value="ja">日本語</option>
+            </select>
         </div>
     </nav>
 
@@ -624,6 +805,8 @@
 
     <!-- 页脚 -->
     <footer>
+        <div class="corner-decor top-left"></div>
+        <div class="corner-decor bottom-right"></div>
         <div class="footer-quote" data-i18n-key="footerQuote">"完美是不存在的，但我们可以无限接近。"</div>
         <p data-i18n-key="footerCopy">© 2024 Erwin Beaumont. Built with ⚙️ and ☕</p>
     </footer>
@@ -682,6 +865,112 @@
                 copyMsg: `Copied to clipboard!`,
                 footerQuote: `"Perfection doesn't exist, but we can get infinitely close."`,
                 footerCopy: `© 2024 Erwin Beaumont. Built with ⚙️ and ☕`
+            },
+            ja: {
+                title: `Erwin Beaumont | 歯車とコード`,
+                navAbout: `自己紹介`,
+                navWork: `今やっていること`,
+                navHobbies: `作業台の外側`,
+                navThoughts: `ひとことメモ`,
+                navContact: `連絡先`,
+                heroTagline: `「歯車とコードで、ちょっと面白いものを作る。」`,
+                aboutTitle: `私について`,
+                cardIntroTitle: `こんにちは、Erwin です。`,
+                cardIntroBody: `ドイツとフランスのハーフで、現在ミュンヘンで機械工学とロボティクスの大学院に通っています。工学系学生といえば「ボサボサ頭にチェックシャツ」のイメージかもしれませんが——残念ながら、チェックシャツは3枚しか持っていません（冗談です）。`,
+                cardMakerTitle: `なんでも分解したがる子ども`,
+                cardMakerBody: `小さい頃から、とにかく物を分解するのが好きでした。5歳で家のコーヒーメーカーを分解し、7歳で父の機械式腕時計を分解し、12歳では母の掃除機を「なんちゃって自走式」の……あまりうまくいかなかったロボット掃除機に改造しました。父はレーシングカーのエンジニア、母は建築デザイナー。たぶん「自分の手で作らないと気が済まない」遺伝子を受け継いだのでしょう。`,
+                skillMechanical: `機械工学`,
+                skillRobotics: `ロボティクス`,
+                skillPython: `Python`,
+                skillCpp: `C++`,
+                skillCAD: `CAD モデリング`,
+                skillCircuit: `回路設計`,
+                skill3dPrint: `3D プリント`,
+                skillGerman: `ドイツ語`,
+                skillFrench: `フランス語`,
+                skillEnglish: `英語`,
+                workTitle: `今取り組んでいること`,
+                workCard1Title: `🤖 ヒューマノイドロボットのモーション制御`,
+                workCard1Body: `今は主にヒューマノイドロボットのモーション制御を研究しています——簡単に言うと、「ロボットの歩き方をゾンビっぽくしない」ための研究です。聞こえよりずっと難しくて、各関節の協調、重心のバランス、地形への適応……ロボットが転んだ回数は、私が飲んだコーヒーの数より多いかもしれません。`,
+                workCard2Title: `🔧 個人メカニカルプロジェクト`,
+                workCard2Body: `授業の合間には、個人でメカ系のプロジェクトも受けています。バンドのために自動ステージ照明システムを作ったり、友人のカフェ向けにレトロ風の全自動コーヒーマシンを設計したりしました。「ちょっと変だけど面白い」依頼が特に好きです。`,
+                hobbiesTitle: `作業台の外側`,
+                hobbyRacingTitle: `レース`,
+                hobbyRacingBody: `自作のカートで、週末はサーキットを数周。スピードに乗ると、頭の中が空っぽになります。`,
+                hobbyBoxingTitle: `ボクシング`,
+                hobbyBoxingBody: `週に2〜3回ジムへ。サンドバッグを殴っている間は、何も考えなくていい時間です。`,
+                hobbyCelloTitle: `チェロ`,
+                hobbyCelloBody: `不安な夜にはバッハを一曲。かなり効きます。`,
+                hobbyCoffeeTitle: `コーヒー`,
+                hobbyCoffeeBody: `家にはグラインダーが3台あります。エンジニア流のロマンです。`,
+                thoughtsTitle: `ちょっとした本音`,
+                thought1: `おしゃべりはあまり得意ではありません。返信が遅いのは、そっけないからではなく、本当に何と返せばいいか考えているだけです。`,
+                thought2: `遅刻が嫌いです。自分の遅刻も、他人の遅刻も。`,
+                thought3: `雨の日に作業場で雨音を聞きながら基板を半田付けするのが好きです。`,
+                thought4: `最近はお菓子作りを練習中ですが、成功率は今のところ3割くらいです。`,
+                thought5: `スーパーでチョコレートの原材料表示を真剣に眺めている身長193cmの男がいたら、多分それは私です。`,
+                thought6: `新しいメカニカルキーボードを見ると、本気で半日くらいテンションが上がります。`,
+                thought7: `工具箱のスパナはサイズ順に並んでいないと落ち着きません。完全に職業病です。`,
+                contactTitle: `連絡先`,
+                contactIntro: `面白いメカ系プロジェクトのアイデアがあったり、ロボットやコーヒーの話をしてみたかったりしたら、ぜひメールしてください。`,
+                contactNote: `広告や雑な営業メールはお断りですが、「これは！」というアイデアにはきちんと返信します。`,
+                emailDisplay: `📧 erwin.beaumont@xxmail.com`,
+                copyMsg: `クリップボードにコピーしました！`,
+                footerQuote: `「完璧というものは存在しない。でも、限りなく近づくことはできる。」`,
+                footerCopy: `© 2024 Erwin Beaumont. 歯車とコーヒーでできています`
+            },
+            fr: {
+                title: `Erwin Beaumont | Engrenages & Code`,
+                navAbout: `À propos`,
+                navWork: `Mes projets`,
+                navHobbies: `Hors de l'atelier`,
+                navThoughts: `Pensées`,
+                navContact: `Contact`,
+                heroTagline: `"Construire des choses curieuses avec des engrenages et du code."`,
+                aboutTitle: `À propos de moi`,
+                cardIntroTitle: `Salut, je suis Erwin.`,
+                cardIntroBody: `Moitié allemand, moitié français, actuellement étudiant en master d'ingénierie mécanique et robotique à Munich. Si vous imaginez un étudiant en ingénierie avec des cheveux en bataille et des chemises à carreaux sans fin—désolé, ma collection de chemises à carreaux n'en compte que trois (je plaisante).`,
+                cardMakerTitle: `L'enfant qui démontait tout`,
+                cardMakerBody: `J'ai toujours aimé démonter les choses depuis tout petit. À cinq ans, j'ai démonté la machine à café familiale, à sept ans la montre de mon père, à douze ans j'ai transformé l'aspirateur de ma mère en une sorte de... robot aspirateur pas vraiment réussi. Papa est ingénieur en voitures de course, maman est architecte, donc j'ai probablement hérité du gène "je dois le construire moi-même".`,
+                skillMechanical: `Ingénierie mécanique`,
+                skillRobotics: `Robotique`,
+                skillPython: `Python`,
+                skillCpp: `C++`,
+                skillCAD: `Modélisation CAO`,
+                skillCircuit: `Conception de circuits`,
+                skill3dPrint: `Impression 3D`,
+                skillGerman: `Allemand`,
+                skillFrench: `Français`,
+                skillEnglish: `Anglais`,
+                workTitle: `Ce sur quoi je travaille`,
+                workCard1Title: `🤖 Contrôle de mouvement humanoïde`,
+                workCard1Body: `Je me concentre sur le contrôle de mouvement pour robots humanoïdes—en gros, leur apprendre à marcher sans avoir l'air de zombies. C'est plus difficile que ça en a l'air : coordination des articulations, équilibre du centre de masse, adaptation au terrain... ces robots se sont plantés plus de fois que j'ai bu de cafés.`,
+                workCard2Title: `🔧 Projets mécaniques indépendants`,
+                workCard2Body: `Pendant mon temps libre, je prends des projets indépendants. J'ai construit un système d'éclairage de scène automatisé pour un groupe, et une machine à café automatique rétro pour le café d'un ami. J'aime les demandes bizarres mais amusantes.`,
+                hobbiesTitle: `Hors de l'atelier`,
+                hobbyRacingTitle: `Course`,
+                hobbyRacingBody: `Kart fait maison, quelques tours sur la piste chaque week-end. La vitesse vide l'esprit.`,
+                hobbyBoxingTitle: `Boxe`,
+                hobbyBoxingBody: `Deux ou trois séances par semaine. Rien à trop réfléchir quand on frappe le sac.`,
+                hobbyCelloTitle: `Violoncelle`,
+                hobbyCelloBody: `Jouer un morceau de Bach les nuits anxieuses—ça fait des merveilles.`,
+                hobbyCoffeeTitle: `Café`,
+                hobbyCoffeeBody: `Trois moulins à la maison. Romance, édition ingénieur.`,
+                thoughtsTitle: `Notes aléatoires`,
+                thought1: `Je ne suis pas doué pour discuter ; les réponses lentes ne sont pas de la froideur, je réfléchis juste.`,
+                thought2: `Je déteste être en retard, que ce soit moi ou les autres.`,
+                thought3: `J'adore souder des circuits imprimés dans l'atelier pendant qu'il pleut dehors.`,
+                thought4: `J'apprends la pâtisserie dernièrement ; le taux de réussite tourne autour de 30%.`,
+                thought5: `Si vous voyez un gars d'1m93 étudier les ingrédients du chocolat au supermarché, c'est probablement moi.`,
+                thought6: `Les nouveaux claviers mécaniques m'excitent vraiment pendant une demi-journée.`,
+                thought7: `Les clés dans la boîte à outils doivent être triées par taille—mon maniaque intérieur l'exige.`,
+                contactTitle: `Contact`,
+                contactIntro: `Si vous avez une idée mécanique ou voulez juste discuter de robots et de café, envoyez-moi un email.`,
+                contactNote: `Pas de pub, pas de spam—si votre idée est cool, je répondrai sincèrement.`,
+                emailDisplay: `📧 erwin.beaumont@xxmail.com`,
+                copyMsg: `Copié dans le presse-papiers !`,
+                footerQuote: `"La perfection n'existe pas, mais on peut s'en approcher infiniment."`,
+                footerCopy: `© 2024 Erwin Beaumont. Construit avec ⚙️ et ☕`
             }
         };
 
@@ -697,25 +986,23 @@
         const langToggle = document.querySelector('.lang-toggle');
 
         function applyLanguage(lang) {
-            const isEnglish = lang === 'en';
-            document.documentElement.lang = isEnglish ? 'en' : 'zh-CN';
+            document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'ja' ? 'ja' : (lang === 'fr' ? 'fr' : 'zh-CN'));
             document.querySelectorAll('[data-i18n-key]').forEach(el => {
                 const key = el.getAttribute('data-i18n-key');
-                const targetText = isEnglish ? translations.en[key] : originalTexts[key];
-                if (targetText) {
-                    el.textContent = targetText;
-                }
+                const targetText = translations[lang]?.[key] || originalTexts[key];
+                if (targetText) el.textContent = targetText;
             });
-            if (langToggle) {
-                langToggle.textContent = isEnglish ? '中文' : 'EN';
-                langToggle.setAttribute('aria-label', isEnglish ? 'Switch to Chinese' : '切换到英语');
+            if (translations[lang]?.title) {
+                document.title = translations[lang].title;
+            } else {
+                document.title = originalTexts.title || document.title;
             }
-            document.title = isEnglish && translations.en.title ? translations.en.title : (originalTexts.title || document.title);
+            if (langToggle) langToggle.value = lang;
         }
 
         if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            langToggle.addEventListener('change', (e) => {
+                currentLang = e.target.value;
                 applyLanguage(currentLang);
             });
         }
