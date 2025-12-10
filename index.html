@@ -694,11 +694,11 @@
                 <a href="#thoughts" data-i18n-key="navThoughts">碎碎念</a>
                 <a href="#contact" data-i18n-key="navContact">联系我</a>
             </div>
-            <select class="lang-toggle" aria-label="选择语言">
-                <option value="zh">中文</option>
-                <option value="en">English</option>
-                <option value="fr">Français</option>
-                <option value="ja">日本語</option>
+            <select class="lang-toggle" aria-label="Select Language">
+                <option value="en">Language</option>
+                <option value="zh" style="font-size: 16px;">语言</option>
+                <option value="fr">Langue</option>
+                <option value="ja" style="font-size: 16px;">言語</option>
             </select>
         </div>
     </nav>
@@ -798,7 +798,7 @@
         <p style="color: var(--text-dim); margin-bottom: 20px;" data-i18n-key="contactIntro">如果你有有趣的机械项目想法，或者只是想聊聊机器人和咖啡，欢迎发邮件。</p>
         <p style="color: var(--text-dim); font-size: 14px;" data-i18n-key="contactNote">不接广告，不闲聊，但如果你的idea足够酷，我会认真回复。</p>
         <div class="email-display" onclick="copyEmail()" data-i18n-key="emailDisplay">
-            📧 erwin.beaumont@xxmail.com
+            📧 Alex231y@hema.edu.kg
         </div>
         <p id="copy-msg" data-i18n-key="copyMsg" style="color: var(--primary); font-size: 14px; opacity: 0; transition: opacity 0.3s;">已复制到剪贴板！</p>
     </section>
@@ -861,7 +861,7 @@
                 contactTitle: `Contact`,
                 contactIntro: `If you have a mechanical idea or just want to chat robots and coffee, drop me an email.`,
                 contactNote: `No ads, no spam--if your idea is cool, I'll reply sincerely.`,
-                emailDisplay: `📧 erwin.beaumont@xxmail.com`,
+                emailDisplay: `📧 Alex231y@hema.edu.kg`,
                 copyMsg: `Copied to clipboard!`,
                 footerQuote: `"Perfection doesn't exist, but we can get infinitely close."`,
                 footerCopy: `© 2024 Erwin Beaumont. Built with ⚙️ and ☕`
@@ -914,7 +914,7 @@
                 contactTitle: `連絡先`,
                 contactIntro: `面白いメカ系プロジェクトのアイデアがあったり、ロボットやコーヒーの話をしてみたかったりしたら、ぜひメールしてください。`,
                 contactNote: `広告や雑な営業メールはお断りですが、「これは！」というアイデアにはきちんと返信します。`,
-                emailDisplay: `📧 erwin.beaumont@xxmail.com`,
+                emailDisplay: `📧 Alex231y@hema.edu.kg`,
                 copyMsg: `クリップボードにコピーしました！`,
                 footerQuote: `「完璧というものは存在しない。でも、限りなく近づくことはできる。」`,
                 footerCopy: `© 2024 Erwin Beaumont. 歯車とコーヒーでできています`
@@ -967,7 +967,7 @@
                 contactTitle: `Contact`,
                 contactIntro: `Si vous avez une idée mécanique ou voulez juste discuter de robots et de café, envoyez-moi un email.`,
                 contactNote: `Pas de pub, pas de spam—si votre idée est cool, je répondrai sincèrement.`,
-                emailDisplay: `📧 erwin.beaumont@xxmail.com`,
+                emailDisplay: `📧 Alex231y@hema.edu.kg`,
                 copyMsg: `Copié dans le presse-papiers !`,
                 footerQuote: `"La perfection n'existe pas, mais on peut s'en approcher infiniment."`,
                 footerCopy: `© 2024 Erwin Beaumont. Construit avec ⚙️ et ☕`
@@ -982,7 +982,7 @@
             }
         });
 
-        let currentLang = 'zh';
+        let currentLang = 'en';
         const langToggle = document.querySelector('.lang-toggle');
 
         function applyLanguage(lang) {
@@ -1004,10 +1004,38 @@
             langToggle.addEventListener('change', (e) => {
                 currentLang = e.target.value;
                 applyLanguage(currentLang);
+
+        // 根据选中语言调整字号
+        function updateLangToggleSize() {
+            const lang = langToggle.value;
+            if (lang === 'zh' || lang === 'ja') {
+                langToggle.style.fontSize = '16px';
+            } else {
+                langToggle.style.fontSize = '13px';
+            }
+        }
+        if (langToggle) {
+            updateLangToggleSize();
+            langToggle.addEventListener('change', updateLangToggleSize);
+        }
             });
         }
 
         applyLanguage(currentLang);
+
+        // 根据选中语言调整字号
+        function updateLangToggleSize() {
+            const lang = langToggle.value;
+            if (lang === 'zh' || lang === 'ja') {
+                langToggle.style.fontSize = '16px';
+            } else {
+                langToggle.style.fontSize = '13px';
+            }
+        }
+        if (langToggle) {
+            updateLangToggleSize();
+            langToggle.addEventListener('change', updateLangToggleSize);
+        }
 
         // 鼠标点击特效
         document.addEventListener('click', function(e) {
@@ -1051,7 +1079,7 @@
 
         // 复制邮箱
         function copyEmail() {
-            navigator.clipboard.writeText('erwin.beaumont@xxmail.com');
+            navigator.clipboard.writeText('Alex231y@hema.edu.kg');
             const msg = document.getElementById('copy-msg');
             msg.style.opacity = '1';
             setTimeout(() => {
@@ -1092,3 +1120,6 @@
     </script>
 </body>
 </html>
+
+
+
